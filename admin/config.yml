@@ -21,7 +21,7 @@ collections:
     label: "Cars"
     folder: "_cars"
     create: true
-    slug: "{{slug}}-{{uuid}}"
+    slug: "{{slug}}-{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}"
     media_folder: "/assets/uploads/cars/{{slug}}"
     public_folder: "/assets/uploads/cars/{{slug}}"
     extension: "md"
