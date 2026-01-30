@@ -5,10 +5,11 @@ year: 2017
 engine: 2.0 бензин
 under_deposit: false
 photos:
-  - /assets/uploads/cars/2026-01-30-21.49.01.jpg
-  - /assets/uploads/cars/2026-01-30-21.49.08.jpg
-  - /assets/uploads/cars/2026-01-30-21.49.13.jpg
-  - /assets/uploads/cars/2026-01-30-21.49.17.jpg
+  - https://res.cloudinary.com/dpllddkot/image/upload/v1769805846/2026-01-30_21.49.01_knq3au.jpg
+  - https://res.cloudinary.com/dpllddkot/image/upload/v1769805847/2026-01-30_21.49.08_icufvx.jpg
+  - https://res.cloudinary.com/dpllddkot/image/upload/v1769805847/2026-01-30_21.49.13_sljwuq.jpg
+  - https://res.cloudinary.com/dpllddkot/image/upload/v1769805847/2026-01-30_21.49.17_crkdj6.jpg
+  - https://res.cloudinary.com/dpllddkot/image/upload/v1769805849/2026-01-30_22.42.19_a14wn9.jpg
 ---
 Автомобіль пригнаний з США цілий
 
