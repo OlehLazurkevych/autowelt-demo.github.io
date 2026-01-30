@@ -15,7 +15,6 @@ logo:
 
 media_folder: "assets/uploads/cars"   # where images are stored in repo
 public_folder: "/assets/uploads/cars" # how the site references them
-publish_mode: editorial_workflow
 
 collections:
   - name: "cars"
