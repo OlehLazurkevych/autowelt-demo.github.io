@@ -84,8 +84,8 @@ a{ color: inherit; }
   max-width: 520px;
 }
 .hero__logo{
-  width: 150px;
-  height: 150px;
+  width: 90px;
+  height: 90px;
   object-fit: contain;
   border-radius: 50%;
   background: transparent;
@@ -308,7 +308,7 @@ a{ color: inherit; }
 }
 
 /* Mobile tuning */
-@media (max-width: 420px){
+@media (max-width: 480px){
   .section--hero{ height: 170px; }
   .hero{ align-items: flex-start; }
   .hero__logo{ width: 74px; height: 74px; }
