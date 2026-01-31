@@ -75,7 +75,24 @@ title: AutoWelt
                   <div class="meta-item">
                     <span class="meta-ico" aria-hidden="true">
                       <!-- drivetrain -->
-                      <svg viewBox="0 0 24 24" fill="none"><path d="M7 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7 18h10M7 18V8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path
+                          d="
+                            M3 6 H7 V9 H3 Z
+                            M17 6 H21 V9 H17 Z
+                            M3 15 H7 V18 H3 Z
+                            M17 15 H21 V18 H17 Z
+                      
+                            M12 7.5 V16.5
+                            M7 7.5 H17
+                            M7 16.5 H17
+                          "
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
                     </span>
                     <span>{{ car.drive }}</span>
                   </div>
@@ -84,7 +101,7 @@ title: AutoWelt
 
               <div class="car-card__bottom">
               {% if car.price_usd %}
-                <div class="car-card__price">${{ car.price_usd }}</div>
+                <div class="car-card__price">${{ car.price_usd | number_with_delimiter: " " }}</div>
               {% endif %}
               </div>
             </div>
