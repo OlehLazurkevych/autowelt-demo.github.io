@@ -308,7 +308,7 @@ a{ color: inherit; }
 }
 
 /* Mobile tuning */
-@media (max-width: 480px){
+@media (max-width: 320px){
   .section--hero{ height: 170px; }
   .hero{ align-items: flex-start; }
   .hero__logo{ width: 74px; height: 74px; }
