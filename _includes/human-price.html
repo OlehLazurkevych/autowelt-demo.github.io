@@ -1,0 +1,10 @@
+{% assign n = include.value | append: "" %}
+{% assign out = "" %}
+
+{% while n.size > 3 %}
+  {% assign chunk = n | slice: n.size | minus: 3, 3 %}
+  {% assign out = " " | append: chunk | append: out %}
+  {% assign n = n | slice: 0, n.size | minus: 3 %}
+{% endwhile %}
+
+{{ n }}{{ out }}

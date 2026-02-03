@@ -125,7 +125,7 @@ title: AutoWelt
 
                 <div class="car-card__bottom">
                 {% if car.price_usd %}
-                  <div class="car-card__price">${{ car.price_usd | number_with_delimiter: " " }}</div>
+                  <div class="car-card__price">${% include human-price.html value=car.price_usd %}</div>
                 {% endif %}
                 </div>
               </div>
