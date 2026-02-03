@@ -107,6 +107,58 @@ a{ color: inherit; }
   font-size: 18px;
 }
 
+/* Menu */
+.section--menu{
+  padding: 6px 0;
+}
+.menu{
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap; /* allows 2 lines on mobile */
+  padding: 6px 0;
+}
+.menu__link{
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  padding: 6px 6px 10px;
+  color: rgba(20, 35, 60, 0.86);
+  font-weight: 650;
+  letter-spacing: 0.2px;
+  font-size: 14px;
+  line-height: 1.15;
+}
+/* The underline */
+.menu__u{
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(80, 130, 200, 0.35);
+  transition: 180ms ease;
+}
+/* Hover behavior */
+.menu__link:hover .menu__u{
+  background: rgba(80, 130, 200, 0.85);
+  box-shadow: 0 0 14px rgba(80, 130, 200, 0.35);
+}
+.menu__link.is-active .menu__u{
+  background: rgba(80, 130, 200, 0.90);
+  box-shadow: 0 0 16px rgba(80, 130, 200, 0.40);
+}
+/* Mobile spacing */
+@media (max-width: 420px){
+  .menu{
+    gap: 10px 14px;
+  }
+  .menu__link{
+    max-width: 120px; /* encourages wrapping to 2 lines */
+  }
+}
+
 /* 2) sort */
 .btn--primary{
   background: rgba(180, 220, 255, 0.55);
@@ -142,10 +194,10 @@ a{ color: inherit; }
 /* Outer rounded edges */
 .sortbar .btn:first-child{
   border-radius: 999px 0 0 999px;
-  border-right: none;
 }
 .sortbar .btn:last-child{
   border-radius: 0 999px 999px 0;
+  border-left: none;
 }
 /* Hover effect: dreamy glow + stronger border */
 .sortbar .btn:hover{
@@ -160,9 +212,6 @@ a{ color: inherit; }
 /* Active press (not "active state", just click feedback) */
 .sortbar .btn:active{
   transform: scale(0.98);
-}
-.sortbar .btn:first-child{
-  border-right: 1px solid rgba(80,110,150,0.18);
 }
 .sortbar .btn.is-active{
   background: radial-gradient(

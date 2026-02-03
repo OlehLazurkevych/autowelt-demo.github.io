@@ -1,6 +1,6 @@
 ---
 layout: default
-title: AutoWelt Cars on the way
+title: Автомобілі в дорозі
 permalink: /cars-on-the-way/
 ---
 
@@ -23,28 +23,56 @@ permalink: /cars-on-the-way/
       </div>
     </section>
 
+    <!-- 1) Menu links -->
+    <section class="section section--menu">
+      <nav class="menu" aria-label="Main menu">
+
+        <a class="menu__link {% if page.url == '/' %}is-active{% endif %}"
+          href="{{ '/' | relative_url }}">
+          Автомобілі на місці
+          <span class="menu__u" aria-hidden="true"></span>
+        </a>
+
+        <a class="menu__link {% if page.url == '/cars-on-the-way/' %}is-active{% endif %}"
+          href="{{ '/cars-on-the-way/' | relative_url }}">
+          Автомобілі в дорозі
+          <span class="menu__u" aria-hidden="true"></span>
+        </a>
+
+        <a class="menu__link {% if page.url == '/where-to-find-us/' %}is-active{% endif %}"
+          href="{{ '/where-to-find-us/' | relative_url }}">
+          Де нас знайти
+          <span class="menu__u" aria-hidden="true"></span>
+        </a>
+
+      </nav>
+    </section>
+
     <!-- 2) Sort buttons (no logic yet) -->
     <section class="section section--sort">
-      <a class="btn btn--wide btn--primary" href="{{ '/' | relative_url }}">
-        <span class="btn__arrow" aria-hidden="true">←</span>
-        Go back to cars on site
-      </a>
-
       <div class="sortbar">
-        <button class="btn btn--ghost" type="button">Sort by price</button>
-        <button class="btn btn--ghost" type="button">Sort by year</button>
+        <button class="btn btn--ghost" id="sortPrice" type="button">
+          <span class="btn-arrow" aria-hidden="true"></span> За ціною
+        </button>
+        <button class="btn btn--ghost" id="sortYear" type="button">
+          <span class="btn-arrow" aria-hidden="true"></span> За роком
+        </button>
       </div>
     </section>
 
     <!-- 3) Cars grid (flexible height) -->
     <section class="section section--cars">
-      <div class="cars-grid">
+      <div class="cars-grid" id="carsGrid">
         {% assign cars_sorted = site.cars %}
         {% for car in cars_sorted %}
           {% if car.on_site == false %}
             {% assign cover = car.photos[0] | default: site.default_car_image %}
 
-            <a class="car-card" href="{{ car.url | relative_url }}" aria-label="Open {{ car.title | escape }}">
+            <a class="car-card"
+              href="{{ car.url | relative_url }}"
+              aria-label="Open {{ car.title | escape }}"
+              data-price="{{ car.price_usd | default: '' }}"
+              data-year="{{ car.year | default: '' }}">
               <div class="car-card__imgwrap">
                 <img class="car-card__img {% if car.under_deposit %}is-dimmed{% endif %}" src="{{ cover | relative_url }}" alt="{{ car.title | escape }}" loading="lazy">
                 {% if car.under_deposit %}
@@ -57,9 +85,9 @@ permalink: /cars-on-the-way/
                   <div class="car-card__title">{{ car.title }}</div>
                 </div>
 
-                <!-- 4) Explicitly mention status -->
+                <!-- Explicitly mention status -->
                 <div class="car-card__status">
-                  The car is on the way
+                  Автомобіль в дорозі
                 </div>
 
                 <div class="car-card__meta">
@@ -88,17 +116,7 @@ permalink: /cars-on-the-way/
                       <span class="meta-ico" aria-hidden="true">
                         <!-- drivetrain -->
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path
-                            d="
-                              M3 6 H7 V9 H3 Z
-                              M17 6 H21 V9 H17 Z
-                              M3 15 H7 V18 H3 Z
-                              M17 15 H21 V18 H17 Z
-                        
-                              M12 7.5 V16.5
-                              M7 7.5 H17
-                              M7 16.5 H17
-                            "
+                          <path d=" M5 6 H7 V9 H5 Z M17 6 H19 V9 H17 Z M5 15 H7 V18 H5 Z M17 15 H19 V18 H17 Z M12 7.5 V16.5 M7 7.5 H17 M7 16.5 H17"
                             stroke="currentColor"
                             stroke-width="2"
                             stroke-linecap="round"
@@ -129,7 +147,9 @@ permalink: /cars-on-the-way/
         <div class="action-btn" role="button" tabindex="0">
           <span class="action-ico" aria-hidden="true">
             <!-- phone -->
-            <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3 5.2 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7c.1.8.3 1.6.6 2.4a2 2 0 0 1-.5 2.1L9 10a16 16 0 0 0 5 5l.8-1.1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M22 15.9 v3 a2 2 0 0 1-2.2 2 A19.8 19.8 0 0 1 3 5.2 a2 2 0 0 1 2-2.2 h3 a2 2 0 0 1 2 1.7 c.1.8.3 1.6.6 2.4 a2 2 0 0 1-.5 2.1 L9 10 a16 16 0 0 0 5 5 l.8-1.1 a2 2 0 0 1 2.1-.5 c.8.3 1.6.5 3.4.6 A2 2 0 0 1 22 15.9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </span>
           <span>Call us</span>
         </div>
@@ -137,7 +157,10 @@ permalink: /cars-on-the-way/
         <div class="action-btn" role="button" tabindex="0">
           <span class="action-ico" aria-hidden="true">
             <!-- map pin -->
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s7-4.4 7-12a7 7 0 1 0-14 0c0 7.6 7 12 7 12Z" stroke="currentColor" stroke-width="2"/><path d="M12 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22s7-4.4 7-12a7 7 0 1 0-14 0c0 7.6 7 12 7 12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+            </svg>
           </span>
           <span>Find us on map</span>
         </div>
