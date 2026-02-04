@@ -8,5 +8,12 @@ collections:
     output: true   # each car gets its own page under /cars/...
     permalink: /cars/:name/
 
+defaults:
+  - scope:
+      path: ""
+      type: cars
+    values:
+      layout: car
+
 # Optional: set a baseurl if this is a project site (not username.github.io)
 # baseurl: "/carsales-jekyll-website"

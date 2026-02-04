@@ -1,4 +1,5 @@
 ---
+layout: car
 title: "Hyundai Ioniq Hybrid"
 price_usd: 12200
 year: 2019

@@ -1,4 +1,5 @@
 ---
+layout: car
 title: "Audi Q7 Premium Plus "
 price_usd: 26300
 year: 2019

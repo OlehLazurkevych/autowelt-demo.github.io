@@ -1,4 +1,5 @@
 ---
+layout: car
 title: "BMW X1 Xdrive 28i"
 price_usd: 14200
 year: 2017

@@ -1,4 +1,5 @@
 ---
+layout: car
 title: "Volvo XC60 T5"
 year: 2015
 engine: 2 бензин

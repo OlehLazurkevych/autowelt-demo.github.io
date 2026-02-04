@@ -25,6 +25,7 @@ collections:
     extension: "md"
     format: "frontmatter"
     fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "car" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Price (USD)", name: "price_usd", widget: "number", required: false }
       - { label: "Year", name: "year", widget: "number", required: false }

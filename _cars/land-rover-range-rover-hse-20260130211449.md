@@ -1,4 +1,5 @@
 ---
+layout: car
 title: Land Rover Range Rover HSE
 price_usd: 22500
 year: 2015
