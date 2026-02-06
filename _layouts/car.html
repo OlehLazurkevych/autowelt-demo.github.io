@@ -21,7 +21,7 @@ layout: default
     <!-- 2) Back button (JS will make it act like browser back when possible) -->
     <section class="section section--carback">
       <a class="backlink" href="{{ '/' | relative_url }}" id="backLink">
-        <span class="backlink__txt">← go back</span>
+        <span class="backlink__txt">← Повернутись назад</span>
         <span class="backlink__u" aria-hidden="true"></span>
       </a>
     </section>
@@ -37,7 +37,7 @@ layout: default
              loading="lazy">
 
         {% if page.under_deposit %}
-          <div class="car-badge car-badge--deposit">UNDER DEPOSIT</div>
+          <div class="car-badge car-badge--deposit">ПІД ЗАВДАТКОМ</div>
         {% endif %}
       </div>
 
@@ -47,10 +47,10 @@ layout: default
         <!-- Tag pills -->
         <div class="cardetail__tags">
           {% if page.on_site == false %}
-            <span class="tag-pill">Car on the way</span>
+            <span class="tag-pill">Авто в дорозі</span>
           {% endif %}
           {% if page.under_deposit %}
-            <span class="tag-pill tag-pill--deposit">Under deposit</span>
+            <span class="tag-pill">Під завдатком</span>
           {% endif %}
         </div>
 
@@ -58,7 +58,7 @@ layout: default
         <div class="cardetail__meta">
           {% if page.year %}
             <div class="meta-item">
-              <span class="meta-ico" aria-hidden="true">
+              <span class="cardetail-meta-ico" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M7 3v2M17 3v2M4 9h16M6 5h12a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
               </span>
               <span>{{ page.year }}</span>
@@ -67,7 +67,7 @@ layout: default
 
           {% if page.engine %}
             <div class="meta-item">
-              <span class="meta-ico" aria-hidden="true">
+              <span class="cardetail-meta-ico" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 10V7a2 2 0 0 1 2-2h6l2 2h2a2 2 0 0 1 2 2v3M6 10H4v4h2m0-4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2h2v-6h-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span>{{ page.engine }}</span>
@@ -76,27 +76,27 @@ layout: default
 
           {% if page.drive %}
             <div class="meta-item">
-              <span class="meta-ico" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M3 6 H7 V9 H3 Z M17 6 H21 V9 H17 Z M3 15 H7 V18 H3 Z M17 15 H21 V18 H17 Z
-                           M12 7.5 V16.5 M7 7.5 H17 M7 16.5 H17"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <span class="cardetail-meta-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d=" M5 6 H7 V9 H5 Z M17 6 H19 V9 H17 Z M5 15 H7 V18 H5 Z M17 15 H19 V18 H17 Z M12 7.5 V16.5 M7 7.5 H17 M7 16.5 H17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </span>
               <span>{{ page.drive }}</span>
             </div>
           {% endif %}
-
-          {% if page.price_usd %}
-            <div class="meta-item">
-              <span class="meta-ico" aria-hidden="true">
-                <!-- simple $ icon -->
-                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M16 6.5c0-1.9-1.8-3.5-4-3.5s-4 1.2-4 3.1c0 4 8 2 8 6 0 1.9-1.8 3.4-4 3.4s-4-1.2-4-3.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-              </span>
-              <span class="price-inline">${% include human-price.html value=page.price_usd %}</span>
-            </div>
-          {% endif %}
         </div>
+
+        <!-- Price -->
+        {% if page.price_usd %}
+          <div class="cardetail__title">
+            <span>${% include human-price.html value=page.price_usd %}</span>
+          </div>
+        {% endif %}
 
         <!-- Description -->
         {% if content and content != "" %}
@@ -118,26 +118,41 @@ layout: default
       {% endif %}
     </section>
 
+    <!-- 2 again) Back button -->
+    <section class="section section--carback">
+      <a class="backlink" href="{{ '/' | relative_url }}" id="backLink">
+        <span class="backlink__txt">← Повернутись назад</span>
+        <span class="backlink__u" aria-hidden="true"></span>
+      </a>
+    </section>
+
     <!-- 4) Footer actions + copyright -->
     <section class="section section--footer">
       <div class="actions">
         <div class="action-btn" role="button" tabindex="0">
           <span class="action-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3 5.2 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7c.1.8.3 1.6.6 2.4a2 2 0 0 1-.5 2.1L9 10a16 16 0 0 0 5 5l.8-1.1a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.4.6A2 2 0 0 1 22 16.9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M22 15.9 v3 a2 2 0 0 1-2.2 2 A19.8 19.8 0 0 1 3 5.2 a2 2 0 0 1 2-2.2 h3 a2 2 0 0 1 2 1.7 c.1.8.3 1.6.6 2.4 a2 2 0 0 1-.5 2.1 L9 10 a16 16 0 0 0 5 5 l.8-1.1 a2 2 0 0 1 2.1-.5 c.8.3 1.6.5 3.4.6 A2 2 0 0 1 22 15.9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </span>
-          <span>Call us</span>
+          <span>Зателефонуйте, ми відповімо</span>
+          <span>на любе Ваше запитання</span>
         </div>
 
         <div class="action-btn" role="button" tabindex="0">
           <span class="action-ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s7-4.4 7-12a7 7 0 1 0-14 0c0 7.6 7 12 7 12Z" stroke="currentColor" stroke-width="2"/><path d="M12 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22s7-4.4 7-12a7 7 0 1 0-14 0c0 7.6 7 12 7 12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+            </svg>
           </span>
-          <span>Find us on map</span>
+          <span>Доторкніться до авто</span>
+          <span>на нашій площадці</span>
         </div>
       </div>
 
       <div class="copyright">
-        © {{ "now" | date: "%Y" }} AutoWelt. All rights reserved.
+        © {{ "now" | date: "%Y" }} AutoWelt. Всі права захищено.
       </div>
     </section>
 

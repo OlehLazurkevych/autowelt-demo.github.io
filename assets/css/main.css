@@ -486,7 +486,7 @@ a{ color: inherit; }
 .carhead{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 12px;
 }
 .carhead__logo{
@@ -557,17 +557,13 @@ a{ color: inherit; }
   gap: 8px;
 }
 .tag-pill{
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 750;
   color: rgba(20,35,60,0.80);
-  background: rgba(180,220,255,0.35);
-  border: 1px solid rgba(120,170,220,0.25);
+  background: rgba(255,210,225,0.35);
+  border: 1px solid rgba(255,180,200,0.25);
   padding: 6px 10px;
   border-radius: 999px;
-}
-.tag-pill--deposit{
-  background: rgba(255,210,225,0.35);
-  border-color: rgba(255,180,200,0.25);
 }
 
 /* Meta block */
@@ -576,18 +572,28 @@ a{ color: inherit; }
   display: flex;
   flex-wrap: wrap;
   gap: 10px 14px;
-  color: rgba(20,35,60,0.65);
-  font-size: 14px;
+  color: rgba(20,35,60,0.72);
+  font-size: 16px;
 }
-.price-inline{
+.cardetail__title{
   color: rgba(20,35,60,0.90);
   font-weight: 750;
+  font-size: 16px;
+}
+.cardetail-meta-ico{
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+}
+.cardetail-meta-ico svg{
+  width: 18px;
+  height: 18px;
 }
 
 /* Description */
 .cardetail__desc{
   margin-top: 12px;
-  color: rgba(20,35,60,0.72);
+  color: rgba(20,35,60,0.90);
   line-height: 1.5;
 }
 
