@@ -1,15 +1,13 @@
 (() => {
-  const links = document.querySelectorAll(".backLink");
-  if (!links.length) return;
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a.backLink");
+    if (!a) return;
 
-  links.forEach(a => {
-    a.addEventListener("click", (e) => {
-      // If user has history, go back (keeps scroll position automatically)
-      if (window.history.length > 1) {
-        e.preventDefault();
-        window.history.back();
-      }
-      // else fallback to href (home)
-    });
+    // If user has history, go back (keeps scroll position)
+    if (window.history.length > 1) {
+      e.preventDefault();
+      window.history.back();
+    }
+    // else: allow normal navigation via href
   });
 })();
