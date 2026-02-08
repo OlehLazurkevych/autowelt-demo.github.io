@@ -9,7 +9,7 @@
   const arrowYear = btnYear.querySelector(".btn-arrow");
 
   // State
-  let activeField = null; // "price" | "release_year" | null
+  let activeField = null; // "price" | "releaseyear" | null
   let direction = null;   // "asc" | "desc" | null
 
   function toNumberOrNull(value) {
@@ -47,7 +47,7 @@
     if (field === "price") {
       btnPrice.classList.add("is-active");
       if (arrowPrice) arrowPrice.textContent = arrow;
-    } else if (field === "release_year") {
+    } else if (field === "releaseyear") {
       btnYear.classList.add("is-active");
       if (arrowYear) arrowYear.textContent = arrow;
     }
@@ -75,7 +75,7 @@
       activeField = field;
 
       // Default directions:
-      // price: low->high, release_year: new->old
+      // price: low->high, releaseyear: new->old
       direction = (field === "price") ? "asc" : "desc";
     }
 
@@ -84,6 +84,6 @@
   }
 
   btnPrice.addEventListener("click", () => onSortClick("price"));
-  btnYear.addEventListener("click", () => onSortClick("release_year"));
+  btnYear.addEventListener("click", () => onSortClick("releaseyear"));
 })();
   

@@ -52,10 +52,10 @@ permalink: /cars-on-the-way/
     <section class="section section--sort">
       <div class="sortbar">
         <button class="btn btn--ghost" id="sortPrice" type="button">
-          <span class="btn-arrow" aria-hidden="true"></span> За ціною
+          За ціною <span class="btn-arrow" aria-hidden="true"></span>
         </button>
         <button class="btn btn--ghost" id="sortYear" type="button">
-          <span class="btn-arrow" aria-hidden="true"></span> За роком
+          За роком <span class="btn-arrow" aria-hidden="true"></span>
         </button>
       </div>
     </section>
@@ -71,7 +71,7 @@ permalink: /cars-on-the-way/
             href="{{ car.url | relative_url }}"
             aria-label="Open {{ car.title | escape }}"
             data-price="{{ car.price_usd | default: '' }}"
-            data-year="{{ car.release_year | default: '' }}">
+            data-releaseyear="{{ car.release_year | default: '' }}">
             <div class="car-card__imgwrap">
               <img class="car-card__img {% if car.under_deposit %}is-dimmed{% endif %}" src="{{ cover | relative_url }}" alt="{{ car.title | escape }}" loading="lazy">
               {% if car.under_deposit %}

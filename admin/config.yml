@@ -71,4 +71,4 @@ collections:
       - label: "В дорозі"
         field: "on_site"
         pattern: false
-    summary: "{{on_site | ternary('', '🚢')}}{{under_deposit | ternary('💸', '')}} • {{created_at | date('YYYY-MM-DD')}} • {{title}} {{release_year}} ${{price_usd | default('_')}}"
+    summary: "{{on_site | ternary('', '🚢')}}{{under_deposit | ternary('💸', '  ')}} • {{created_at | date('YYYY-MM-DD')}} • {{title}} {{release_year}} ${{price_usd | default('_')}}"
