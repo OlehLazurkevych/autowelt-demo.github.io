@@ -68,7 +68,7 @@ collections:
       - label: "На площадці"
         field: "on_site"
         pattern: true
-        - label: "В дорозі"
+      - label: "В дорозі"
         field: "on_site"
         pattern: false
     summary: "{{under_deposit}} {{created_at | date('YYYY-MM-DD')}} {{title}} {{year}} ${{price_usd}}"
