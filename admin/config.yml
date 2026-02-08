@@ -42,7 +42,6 @@ collections:
           - { label: "Задній привід",  value: "Задній привід" }
       - { label: "Під завдатком", name: "under_deposit", widget: "boolean", default: false, required: false }
       - { label: "На площадці", name: "on_site", widget: "boolean", default: true }
-      # multi-photo list (any amount)
       - label: "Фотографії"
         name: "photos"
         widget: "list"
@@ -62,8 +61,14 @@ collections:
     view_filters:
       - label: "Під завдатком"
         field: "under_deposit"
+        pattern: true
+      - label: "Не під завдатком"
+        field: "under_deposit"
         pattern: false
       - label: "На площадці"
         field: "on_site"
         pattern: true
-    summary: {{under_deposit}} {{created_at | date('YYYY-MM-DD')}} {{title}} {{year}} ${{price_usd}}
+        - label: "В дорозі"
+        field: "on_site"
+        pattern: false
+    summary: "{{under_deposit}} {{created_at | date('YYYY-MM-DD')}} {{title}} {{year}} ${{price_usd}}"
