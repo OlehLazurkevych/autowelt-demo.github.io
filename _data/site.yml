@@ -1,5 +1,10 @@
-hero_description: "Autowelt — cars on sale. Honest descriptions, quick paperwork, and simple purchase process."
+hero_description: |-
+  **Autowelt** — продаж авто.
+
+  Підбір, покупка, пригон, розмитнення
+
+  *м. Львів вул. Городоцька, 300*
 phone: "+380000000000"
-footer_call_button_text: "Подзвонити"
-footer_map_button_text: "Ми на карті"
-footer_copyright_text: "AutoWelt. Всі права захищено."
+footer_call_button_text: Подзвоніть нам
+footer_map_button_text: Ми на карті
+footer_copyright_text: AutoWelt. Всі права захищено.
