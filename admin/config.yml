@@ -81,3 +81,6 @@ collections:
         fields:
           - { label: "Опис біля логотипу", name: "hero_description", widget: "markdown" }
           - { label: "Номер телефону", name: "phone", widget: "string", hint: "+380000000000" }
+          - { label: "Текст нижньої червоної кнопки: Подзвонити", name: "footer_call_button_text", widget: "string" }
+          - { label: "Текст нижньої червоної кнопки: Мапа", name: "footer_map_button_text", widget: "string" }
+          - { label: "Текст нижнього тексту захисту прав", name: "footer_copyright_text", widget: "string" }
