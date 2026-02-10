@@ -772,7 +772,7 @@ a {
   padding: 10px 16px;
   border-radius: 999px;
 
-  background: linear-gradient(180deg, rgba(20, 35, 60, 0.06), rgba(20, 35, 60, 0.124));
+  background: none;
   color: rgba(20, 35, 60, 0.90);
   text-decoration: none;
 
@@ -780,15 +780,15 @@ a {
   font-size: 14px;
 
   border: 1px solid rgba(20, 35, 60, 0.90);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.055);
 
   transition: all .18s ease;
 }
-
-.video-pill:hover{
-  background: linear-gradient(180deg, rgba(20, 35, 60, 0.09), rgba(20, 35, 60, 0.154));
-  border-color: rgba(20, 35, 60, 0.90);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine){
+  .video-pill:hover{
+    background: linear-gradient(180deg, rgba(20, 35, 60, 0.06), rgba(20, 35, 60, 0.1));
+    border-color: rgba(20, 35, 60, 0.90);
+    transform: translateY(-1px);
+  }
 }
 
 .video-pill__ico{
