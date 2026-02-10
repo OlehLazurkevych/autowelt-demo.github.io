@@ -1,0 +1,27 @@
+{% if page.video_url %}
+
+    {% assign url = page.video_url %}
+    {% if url contains "instagram" %}
+        {% assign label = "Відеоогляд автомобіля (Instagram)" %}
+    {% elsif url contains "tiktok" %}
+        {% assign label = "Відеоогляд автомобіля (TikTok)" %}
+    {% elsif url contains "youtube" %}
+        {% assign label = "Відеоогляд автомобіля (YouTube)" %}
+    {% else %}
+        {% assign label = "Відеоогляд автомобіля" %}
+    {% endif %}
+
+    <a class="video-pill" href="{{ url }}" target="_blank" rel="noopener noreferrer">
+
+        <span class="video-pill__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 5v14l11-7-11-7Z" fill="currentColor" />
+            </svg>
+        </span>
+
+        <span class="video-pill__text">
+            {{ label }}
+        </span>
+
+    </a>
+{% endif %}
