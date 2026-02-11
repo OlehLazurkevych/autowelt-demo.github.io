@@ -89,10 +89,13 @@ collections:
             name: "where_to_find_us"
             widget: "object"
             fields:
+              - { label: "Заголовок перед текстом як доїхати", name: "directions_title", widget: "string" }
               - { label: "Текст з інструкціями як доїхати", name: "directions_text", widget: "markdown" }
               - { label: "Google maps embed URL", name: "map_embed_url", widget: "string", hint: "https://www.google.com/maps/embed?..." }
+              - { label: "Заголовок перед текстом про бізнес та послуги", name: "value_title", widget: "string" }
               - { label: "Текст про бізнес та послуги", name: "value_text", widget: "markdown" }
               # SOCIAL LINKS
+              - { label: "Заголовок перед посиланнями на соцмережі", name: "socials_title", widget: "string" }
               - label: "Соцмережі"
                 name: "socials"
                 widget: "object"
