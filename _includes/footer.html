@@ -1,7 +1,8 @@
 <section class="section section--footer">
     <div class="actions">
 
-        <a class="action-link" href="tel:{{ site.data.site.phone }}">
+        <a class="action-link" href="tel:{{ site.data.site.phone }}"
+            onclick="gtag('event','phone_click',{location:'footer'});">
             <div class="action-btn">
                 <span class="action-ico" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
@@ -16,7 +17,8 @@
             </div>
         </a>
 
-        <a class="action-link" href="{{ '/where-to-find-us-lviv/' | relative_url }}">
+        <a class="action-link" href="{{ '/where-to-find-us-lviv/' | relative_url }}"
+            onclick="gtag('event','where_to_find_us_lviv_click',{location:'footer'});">
             <div class="action-btn">
                 <span class="action-ico" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">

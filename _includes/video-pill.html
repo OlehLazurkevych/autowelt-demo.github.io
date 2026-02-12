@@ -1,17 +1,17 @@
 {% if page.video_url %}
 
-    {% assign url = page.video_url %}
-    {% if url contains "instagram" %}
+    {% if page.video_url contains "instagram" %}
         {% assign label = "Відеоогляд автомобіля (Instagram)" %}
-    {% elsif url contains "tiktok" %}
+    {% elsif page.video_url contains "tiktok" %}
         {% assign label = "Відеоогляд автомобіля (TikTok)" %}
-    {% elsif url contains "youtube" %}
+    {% elsif page.video_url contains "youtube" %}
         {% assign label = "Відеоогляд автомобіля (YouTube)" %}
     {% else %}
         {% assign label = "Відеоогляд автомобіля" %}
     {% endif %}
 
-    <a class="video-pill" href="{{ url }}" target="_blank" rel="noopener noreferrer">
+    <a class="video-pill" href="{{ page.video_url }}" target="_blank" rel="noopener noreferrer"
+        onclick="gtag('event','video_pill_click',{car:'{{ page.title }}'});">
 
         <span class="video-pill__ico" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">

@@ -1,19 +1,22 @@
 <section class="section section--menu">
     <nav class="menu" aria-label="Main menu">
 
-        <a class="menu__link {% if page.url == '/' %}is-active{% endif %}" href="{{ '/' | relative_url }}">
+        <a class="menu__link {% if page.url == '/' %}is-active{% endif %}" href="{{ '/' | relative_url }}"
+            onclick="gtag('event','cars_on_site_click',{location:'menu'});">
             Автомобілі на місці
             <span class="menu__u" aria-hidden="true"></span>
         </a>
 
         <a class="menu__link {% if page.url == '/cars-on-the-way/' %}is-active{% endif %}"
-            href="{{ '/cars-on-the-way/' | relative_url }}">
+            href="{{ '/cars-on-the-way/' | relative_url }}"
+            onclick="gtag('event','cars_on_the_way_click',{location:'menu'});">
             Автомобілі в дорозі
             <span class="menu__u" aria-hidden="true"></span>
         </a>
 
         <a class="menu__link {% if page.url == '/where-to-find-us-lviv/' %}is-active{% endif %}"
-            href="{{ '/where-to-find-us-lviv/' | relative_url }}">
+            href="{{ '/where-to-find-us-lviv/' | relative_url }}"
+            onclick="gtag('event','where_to_find_us_lviv_click',{location:'menu'});">
             Де нас знайти
             <span class="menu__u" aria-hidden="true"></span>
         </a>

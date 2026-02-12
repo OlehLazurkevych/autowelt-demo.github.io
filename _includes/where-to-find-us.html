@@ -32,14 +32,18 @@
         <div class="w2f-socials">
             {% if w.socials.instagram %}
                 <a class="social-pill" href="{{ w.socials.instagram }}" target="_blank"
-                    rel="noopener noreferrer">Instagram</a>
+                    rel="noopener noreferrer"
+                    onclick="gtag('event','instagram_click');">Instagram</a>
             {% endif %}
             {% if w.socials.tiktok %}
-                <a class="social-pill" href="{{ w.socials.tiktok }}" target="_blank" rel="noopener noreferrer">TikTok</a>
+                <a class="social-pill" href="{{ w.socials.tiktok }}" target="_blank" 
+                    rel="noopener noreferrer"
+                    onclick="gtag('event','tiktok_click');">TikTok</a>
             {% endif %}
             {% if w.socials.telegram %}
                 <a class="social-pill" href="{{ w.socials.telegram }}" target="_blank"
-                    rel="noopener noreferrer">Telegram</a>
+                    rel="noopener noreferrer"
+                    onclick="gtag('event','telegram_click');">Telegram</a>
             {% endif %}
         </div>
     </div>

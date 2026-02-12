@@ -79,6 +79,14 @@
 
   function onSortClick(field) {
     clickNo = clickNo + 1
+
+    // Google analytics
+    gtag('event','sort_used',{
+      field: activeField,
+      direction: direction,
+      click_number: clickNo
+    });
+
     // Same button clicked
     if (activeField === field) {
       direction = (direction === "asc") ? "desc" : "asc";

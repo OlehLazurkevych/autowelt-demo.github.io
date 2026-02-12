@@ -126,3 +126,17 @@ layout: default
 
   </div>
 </div>
+
+<!-- Google Analytics -->
+<script>
+  gtag('event', 'car_view', {
+    car_title: "{{ page.title }}",
+    car_release_year: "{{ page.release_year }}",
+    engine: "{{ page.engine }}",
+    drive: "{{ page.drive }}",
+    car_price: "{{ page.price_usd }}",
+    on_site: "{{ page.on_site }}",
+    under_deposit: "{{ page.under_deposit }}"
+  });
+</script>
+  

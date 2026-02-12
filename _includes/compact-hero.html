@@ -4,7 +4,8 @@
             <img class="carhead__logo" src="{{ '/assets/img/logo.png' | relative_url }}" alt="AutoWelt logo">
         </a>
 
-        <a class="carhead__phone" href="tel:{{ site.data.site.phone }}">
+        <a class="carhead__phone" href="tel:{{ site.data.site.phone }}"
+            onclick="gtag('event','phone_click',{location:'compact-hero'});">
             {% include human-phone.html phone=site.data.site.phone %}
         </a>
     </div>

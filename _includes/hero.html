@@ -5,7 +5,8 @@
             <div class="hero__desc">
                 {{ site.data.site.hero_description | markdownify }}
             </div>
-            <a class="hero__phone" href="tel:{{ site.data.site.phone }}">
+            <a class="hero__phone" href="tel:{{ site.data.site.phone }}"
+                onclick="gtag('event','phone_click',{location:'hero'});">
                 {% include human-phone.html phone=site.data.site.phone %}
             </a>
         </div>
