@@ -4,9 +4,9 @@ created_at: 2026-02-14T17:32:00.000+02:00
 title: Land Rover Range Rover HSE
 price_usd: 22500
 release_year: 2015
-alt_release_year: 12 month
-engine: 3.0 бензин
-drive: Передній привід
+alt_release_year: ""
+engine: 3.0 Бензин
+drive: Повний привід
 under_deposit: false
 on_site: true
 photos:
@@ -22,4 +22,15 @@ video_url: https://www.instagram.com/reel/DUD84-YjKgC/?igsh=MTR0OThqaTR4eGk4aQ==
 
 Авто без ДТП.
 
-Комплектація: Адаптив ксенон фари, пневмо, панорама, музика Meridian, підігрів сидінь передніх та задніх і керма, обдуви сидінь, камери кругового обзору, диски R20, датчик сліпих зон.
+Комплектація: 
+
+* Адаптив ксенон фари, 
+* пневмо, 
+* панорама, 
+* музика Meridian, 
+* підігрів сидінь передніх та задніх і керма, 
+* обдуви сидінь, 
+* камери кругового обзору, 
+* диски R20, 
+* датчик сліпих зон,
+* дотяжки дверей
