@@ -1,12 +1,13 @@
 ---
 layout: car
-created_at: 2026-02-08T17:57:00.000+02:00
+created_at: 2026-02-14T18:16:00.000+02:00
 title: Audi Q7 Premium Plus
 price_usd: 37500
 release_year: 2019
-engine: 3.0 бензин
-drive: Передній привід
-under_deposit: true
+alt_release_year: 2020 США
+engine: 3.0 Бензин
+drive: Повний привід
+under_deposit: false
 on_site: true
 photos:
   - https://res.cloudinary.com/dpllddkot/image/upload/v1769805857/2026-01-30_22.42.57_o6bnuv.jpg
@@ -22,4 +23,14 @@ video_url: https://www.instagram.com/reel/DTs8TvPjANp/?igsh=M2gyN3dodGZndWt1
 
 Рестайлінг
 
-Комплектація: диски R20, підігрів сидінь передніх, камери 360ʼ(кругового огляду), музика Bose, контроль сліпих зон, система старт стоп, клімат контроль 3-х зонний, без ключовий доступ, панорама.
+Комплектація: 
+
+* диски R20, 
+* підігрів сидінь передніх, 
+* камери 360ʼ(кругового огляду), 
+* музика Bose, 
+* контроль сліпих зон, 
+* система старт стоп,
+*  клімат контроль 3-х зонний, 
+* без ключовий доступ, 
+* панорама.
