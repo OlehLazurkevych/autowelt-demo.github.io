@@ -1,13 +1,13 @@
 backend:
   name: github
-  repo: OlehLazurkevych/olehlazurkevych.github.io
+  repo: autowelt-lviv/autowelt-lviv.github.io
   branch: main
   base_url: https://netlifyfunctionsoauthforgithub.netlify.app
   auth_endpoint: /.netlify/functions/oauth-start
-  site_domain: olehlazurkevych.github.io # optional but recommended
+  site_domain: autowelt-lviv.github.io # optional but recommended
 
-site_url: https://olehlazurkevych.github.io
-display_url: olehlazurkevych.github.io
+site_url: https://autowelt-lviv.github.io
+display_url: autowelt-lviv.github.io
 
 logo:
   src: /assets/img/logo.png
