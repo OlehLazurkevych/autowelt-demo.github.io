@@ -53,7 +53,7 @@ collections:
           media_folder: "/assets/uploads/cars"
           public_folder: "/assets/uploads/cars"
       - { label: "Опис", name: "body", widget: "markdown", required: false }
-      - { label: "Відео посилання", name: "video_url", widget: "string", equired: false, hint: "https://www.instagram.com..." }
+      - { label: "Відео посилання", name: "video_url", widget: "string", required: false, hint: "https://www.instagram.com..." }
     sortable_fields: ["created_at", "title", "price_usd", "release_year"]
     view_groups:
       - label: "авто на площадці"
