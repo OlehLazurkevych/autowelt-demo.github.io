@@ -5,4 +5,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin
 
-Sitemap: https://autowelt-lviv.github.io/sitemap.xml
+Sitemap: https://autowelt.lviv.ua/sitemap.xml
