@@ -1,9 +1,10 @@
 ---
 layout: car
-created_at: 2026-02-06T17:57:00.000+02:00
+created_at: 2026-02-14T17:32:00.000+02:00
 title: Land Rover Range Rover HSE
 price_usd: 22500
 release_year: 2015
+alt_release_year: 12 month
 engine: 3.0 бензин
 drive: Передній привід
 under_deposit: false
