@@ -1,13 +1,13 @@
 backend:
   name: github
-  repo: OlehLazurkevych/olehlazurkevych.github.io
+  repo: autowelt-lviv/autowelt-lviv.github.io
   branch: main
-  base_url: https://netlifyfunctionsoauthforgithub.netlify.app
+  base_url: https://netlify-functions-oauth-for-github.netlify.app
   auth_endpoint: /.netlify/functions/oauth-start
-  site_domain: olehlazurkevych.github.io # optional but recommended
+  site_domain: autowelt.lviv.ua # optional but recommended
 
-site_url: https://olehlazurkevych.github.io
-display_url: olehlazurkevych.github.io
+site_url: https://autowelt.lviv.ua
+display_url: autowelt.lviv.ua
 
 logo:
   src: /assets/img/logo.png
@@ -53,7 +53,7 @@ collections:
           media_folder: "/assets/uploads/cars"
           public_folder: "/assets/uploads/cars"
       - { label: "Опис", name: "body", widget: "markdown", required: false }
-      - { label: "Відео посилання", name: "video_url", widget: "string", equired: false, hint: "https://www.instagram.com..." }
+      - { label: "Відео посилання", name: "video_url", widget: "string", required: false, hint: "https://www.instagram.com..." }
     sortable_fields: ["created_at", "title", "price_usd", "release_year"]
     view_groups:
       - label: "авто на площадці"
