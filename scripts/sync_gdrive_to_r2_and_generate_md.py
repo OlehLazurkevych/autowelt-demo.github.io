@@ -192,7 +192,7 @@ def list_r2_car_folders() -> list[str]:
     We use aws s3api list-objects-v2 with Delimiter='/'
     """
     res = run([
-        "aws", "--region", "auto"
+        "aws", "--region", "auto",
         "--endpoint-url", R2_ENDPOINT,
         "s3api", "list-objects-v2",
         "--bucket", R2_BUCKET,
