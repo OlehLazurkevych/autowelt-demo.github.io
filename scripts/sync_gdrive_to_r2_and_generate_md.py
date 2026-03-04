@@ -234,17 +234,18 @@ def sync_local_to_r2(local_folder: Path, folder_name: str):
 
 def make_photo_url(folder_name: str, filename: str) -> str:
     # URL-encode per path segment to keep spaces safe
-    return f"{R2_PUBLIC_BASE_URL}/{quote(folder_name)}/{quote(filename)}"
+    return f"{R2_PUBLIC_BASE_URL}/cars/{quote(folder_name)}/{quote(filename)}"
 
-def create_md(g_folder_name: str, slug_folder_name: str, photo_files: list[str]) -> Path:
-    md_path = CARS_MD_DIR / f"{slug_folder_name}.md"
+def create_md(folder_name: str, photo_files: list[str]) -> Path:
+    slug_name = slugify_and_date(folder_name)
+    md_path = CARS_MD_DIR / f"{slug_name}.md"
 
-    urls = [make_photo_url(slug_folder_name, f) for f in photo_files]
+    urls = [make_photo_url(folder_name, f) for f in photo_files]
 
     # YAML front matter (simple + compatible with Jekyll/Eleventy)
     lines = []
     lines.append("---")
-    safe_title = g_folder_name.replace('"', '\\"')
+    safe_title = folder_name.replace('"', '\\"')
     lines.append(f'title: {safe_title}')
     lines.append("photos:")
     for u in urls:
@@ -279,29 +280,25 @@ def main():
     r2_set = set(r2_folders)
 
     missing_on_r2 = sorted(list(gdrive_set - r2_set))
-    missing_on_r2_slug_matrix = [
-        (name, slugify_and_date(name))
-        for name in missing_on_r2
-    ]
 
     print(f"GDrive folders: {len(gdrive_folders)}")
     print(f"R2 folders: {len(r2_folders)}")
     print(f"Missing on R2: {len(missing_on_r2)}")
-    for folder_name, slug_name in missing_on_r2_slug_matrix:
-        print(folder_name, "->", slug_name)
+    for folder_name in missing_on_r2:
+        print(folder_name)
 
     # For each missing folder:
     # 1) download locally
     # 2) upload to R2
     # 3) generate md with URLs
-    for folder_name, slug_name in missing_on_r2_slug_matrix:
+    for folder_name in missing_on_r2:
         local_dst = WORK_DIR / "cars" / folder_name
         copy_gdrive_folder_local(drive, GDRIVE_FOLDER_ID, folder_name, local_dst)
-        sync_local_to_r2(local_dst, slug_name)
+        sync_local_to_r2(local_dst, folder_name)
 
         photo_files = list_gdrive_photos_for_folder(drive, GDRIVE_FOLDER_ID, folder_name)
         print(f"photo_files in {folder_name}:", md.relative_to(REPO_ROOT))
-        md = create_md(folder_name, slug_name, photo_files)
+        md = create_md(folder_name, photo_files)
         print("Created:", md.relative_to(REPO_ROOT))
 
 if __name__ == "__main__":
