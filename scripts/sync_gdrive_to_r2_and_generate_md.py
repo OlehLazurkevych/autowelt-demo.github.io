@@ -121,14 +121,15 @@ def list_gdrive_photos_for_folder(
       <root>/cars/<car_folder_name>/
     Returns sorted list of filenames (no recursion).
     """
+    print("_find_child_folder_id")
     cars_id = _find_child_folder_id(drive, gdrive_root_folder_id, "cars")
     if not cars_id:
         raise RuntimeError("Could not find a 'cars' folder under the provided root folder ID.")
-
+    print("_find_child_folder_id2")
     car_folder_id = _find_child_folder_id(drive, cars_id, car_folder_name)
     if not car_folder_id:
         raise RuntimeError(f"Could not find car folder '{car_folder_name}' under 'cars/'.")
-
+    print("_list_children")
     files = _list_children(drive, car_folder_id, only_files=True)
     return sorted([f["name"] for f in files if f.get("name")])
 
