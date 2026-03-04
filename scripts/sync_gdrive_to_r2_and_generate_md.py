@@ -3,6 +3,7 @@ import re
 import json
 import shutil
 import subprocess
+import unicodedata
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from pathlib import Path
@@ -174,13 +175,22 @@ def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=No
         cwd=cwd,
     )
 
-def slugify_for_filename(name: str) -> str:
-    # Keep readable filenames, but safe for git files
+def slugify_and_date(name: str) -> str:
+    # Keep readable filenames, but safer for R2 URLs and git files
+    now = datetime.now(timezone.utc)
+    # Example datetime in filename: 20260101123030
+    dt = now.strftime("%Y%m%d%H%M%S")
+    s = unicodedata.normalize("NFKC", name).strip()
     s = name.strip().lower()
     s = re.sub(r"\s+", "-", s)
     s = re.sub(r"[^a-z0-9\-_.]+", "-", s)
     s = re.sub(r"-{2,}", "-", s).strip("-")
-    return s or "car"
+    if s:
+        s = f"{s}-{dt}"
+    else:
+        s = f"car-{dt}"
+    s = s.strip("-")
+    return s
 
 def ensure_dirs():
     CARS_MD_DIR.mkdir(parents=True, exist_ok=True)
@@ -191,8 +201,6 @@ def list_r2_car_folders() -> list[str]:
     List prefixes (folders) under s3://bucket/cars/
     We use aws s3api list-objects-v2 with Delimiter='/'
     """
-    res = run([ "aws", "configure", "list" ])
-    print(res.stdout)
     res = run([
         "aws", "--endpoint-url", R2_ENDPOINT,
         "s3api", "list-objects-v2",
@@ -215,11 +223,12 @@ def list_r2_car_folders() -> list[str]:
 
 def sync_local_to_r2(local_folder: Path, folder_name: str):
     # Upload to s3://bucket/cars/<folder_name>/
+    slug = slugify_and_date(folder_name)
     run([
         "aws", "--endpoint-url", R2_ENDPOINT,
         "s3", "sync",
         local_folder.as_posix(),
-        f"s3://{R2_BUCKET}/cars/{folder_name}/",
+        f"s3://{R2_BUCKET}/cars/{slug}/",
         "--no-progress",
     ])
 
@@ -227,19 +236,15 @@ def make_photo_url(folder_name: str, filename: str) -> str:
     # URL-encode per path segment to keep spaces safe
     return f"{R2_PUBLIC_BASE_URL}/{quote(folder_name)}/{quote(filename)}"
 
-def create_md(folder_name: str, photo_files: list[str]) -> Path:
-    now = datetime.now(timezone.utc)
-    # Example datetime in filename: 20260301193010
-    dt = now.strftime("%Y%m%d%H%M%S")
-    slug = slugify_for_filename(folder_name)
-    md_path = CARS_MD_DIR / f"{slug}-{dt}.md"
+def create_md(g_folder_name: str, slug_folder_name: str, photo_files: list[str]) -> Path:
+    md_path = CARS_MD_DIR / f"{slug_folder_name}.md"
 
-    urls = [make_photo_url(folder_name, f) for f in photo_files]
+    urls = [make_photo_url(slug_folder_name, f) for f in photo_files]
 
     # YAML front matter (simple + compatible with Jekyll/Eleventy)
     lines = []
     lines.append("---")
-    safe_title = folder_name.replace('"', '\\"')
+    safe_title = g_folder_name.replace('"', '\\"')
     lines.append(f'title: {safe_title}')
     lines.append("photos:")
     for u in urls:
@@ -274,24 +279,29 @@ def main():
     r2_set = set(r2_folders)
 
     missing_on_r2 = sorted(list(gdrive_set - r2_set))
+    missing_on_r2_slug_matrix = [
+        (name, slugify_and_date(name))
+        for name in missing_on_r2
+    ]
+
     print(f"GDrive folders: {len(gdrive_folders)}")
     print(f"R2 folders: {len(r2_folders)}")
     print(f"Missing on R2: {len(missing_on_r2)}")
-    for x in missing_on_r2:
-        print("  -", x)
+    for folder_name, slug_name in missing_on_r2_slug_matrix:
+        print(folder_name, "->", slug_name)
 
     # For each missing folder:
     # 1) download locally
     # 2) upload to R2
     # 3) generate md with URLs
-    for folder_name in missing_on_r2:
+    for folder_name, slug_name in missing_on_r2_slug_matrix:
         local_dst = WORK_DIR / "cars" / folder_name
         copy_gdrive_folder_local(drive, GDRIVE_FOLDER_ID, folder_name, local_dst)
-        sync_local_to_r2(local_dst, folder_name)
+        sync_local_to_r2(local_dst, slug_name)
 
         photo_files = list_gdrive_photos_for_folder(drive, GDRIVE_FOLDER_ID, folder_name)
         print(f"photo_files in {folder_name}:", md.relative_to(REPO_ROOT))
-        md = create_md(folder_name, photo_files)
+        md = create_md(folder_name, slug_name, photo_files)
         print("Created:", md.relative_to(REPO_ROOT))
 
 if __name__ == "__main__":
