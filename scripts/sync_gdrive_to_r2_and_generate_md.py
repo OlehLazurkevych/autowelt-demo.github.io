@@ -166,7 +166,7 @@ def copy_gdrive_folder_local(
 
 def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=None) -> subprocess.CompletedProcess:
     print(">>", " ".join(cmd))
-    return subprocess.run(
+    p = subprocess.run(
         cmd,
         check=check,
         capture_output=capture,
@@ -174,6 +174,10 @@ def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=No
         env=env,
         cwd=cwd,
     )
+    print("return code:", p.returncode)
+    print("stdout:\n", p.stdout)
+    print("stderr:\n", p.stderr)
+    return p
 
 def slugify_and_date(name: str) -> str:
     # Keep readable filenames, but safer for R2 URLs and git files
