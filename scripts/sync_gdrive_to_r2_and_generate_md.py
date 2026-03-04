@@ -227,12 +227,11 @@ def list_r2_car_folders() -> list[str]:
 
 def sync_local_to_r2(local_folder: Path, folder_name: str):
     # Upload to s3://bucket/cars/<folder_name>/
-    slug = slugify_and_date(folder_name)
     run([
         "aws", "--endpoint-url", R2_ENDPOINT,
         "s3", "sync",
         local_folder.as_posix(),
-        f"s3://{R2_BUCKET}/cars/{slug}/",
+        f"s3://{R2_BUCKET}/cars/{folder_name}/",
         "--no-progress",
     ])
 
