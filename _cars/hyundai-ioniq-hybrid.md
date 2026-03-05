@@ -3,7 +3,7 @@ layout: car
 created_at: 2026-02-08T17:57:00.000+02:00
 title: "Hyundai Ioniq Hybrid"
 price_usd: 12200
-year: 2019
+release_year: 2019
 engine: 1.6 бензин/hybrid
 drive: Передній привід
 under_deposit: false
