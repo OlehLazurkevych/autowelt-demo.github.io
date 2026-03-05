@@ -5,6 +5,7 @@ title: "Volvo XC60 T5"
 year: 2015
 engine: 2 бензин
 drive: Передній привід
+is_sold: true
 under_deposit: true
 on_site: false
 photos:

@@ -6,6 +6,7 @@ price_usd: 14200
 release_year: 2017
 engine: 2 бензин
 drive: Повний привід
+is_sold: true
 under_deposit: false
 on_site: true
 photos:

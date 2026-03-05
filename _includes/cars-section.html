@@ -8,7 +8,9 @@
                 <div class="car-card__imgwrap">
                     <img class="car-card__img {% if car.under_deposit %}is-dimmed{% endif %}"
                         src="{{ cover | relative_url }}" alt="{{ car.title | escape }}" loading="lazy">
-                    {% if car.under_deposit %}
+                    {% if car.is_sold %}
+                        <div class="car-badge car-badge--sold">ПРОДАНА</div>
+                    {% elsif car.under_deposit %}
                         <div class="car-badge car-badge--deposit">ПІД ЗАВДАТКОМ</div>
                     {% endif %}
                 </div>
@@ -72,8 +74,8 @@
                     </div>
 
                     <div class="car-card__bottom">
-                        {% if car.price_usd %}
-                            <div class="car-card__price">${% include human-price.html value=car.price_usd %}</div>
+                        {% if car.price_usd and car.price_usd != blank %}
+                            <div class="car-card__price{% if car.is_sold %} car-card__price--sold{% endif %}">${% include human-price.html value=car.price_usd %}</div>
                         {% endif %}
                     </div>
                 </div>
