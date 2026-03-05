@@ -25,8 +25,8 @@ collections:
     extension: "md"
     format: "frontmatter"
     fields:
-      - { label: "Приховати оголошення", name: "post_hidden", widget: "boolean", default: false, required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "car" }
+      - { label: "Приховати оголошення", name: "post_hidden", widget: "boolean", default: false, required: false }
       - { label: "Дата публікації", name: "created_at", widget: "datetime", default: "{{now}}" }
       - { label: "Заголовок", name: "title", widget: "string", hint: "Наприклад: Land Rover Range Rover HSE" }
       - { label: "Вартість (USD)", name: "price_usd", widget: "number", required: false, hint: "Вартість вказати як ціле число без символів" }
