@@ -35,6 +35,7 @@ jobs:
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
       - name: Run sync script
+        if: success()
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
@@ -49,6 +50,7 @@ jobs:
           python scripts/sync_gdrive_to_r2_and_generate_md.py
 
       - name: Commit and push changes (if any)
+        if: success()
         run: |
           if git status --porcelain | grep -q .; then
             git config user.name "github-actions[bot]"
@@ -62,4 +64,6 @@ jobs:
 
       - name: Cleanup workspace
         if: always()
-        run: rm -rf .work
+        run: |
+          rm -rf .work
+          rm -f gha-creds-*.json
