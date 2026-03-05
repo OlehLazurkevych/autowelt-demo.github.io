@@ -167,8 +167,9 @@ def copy_gdrive_folder_local(
 
 # --------- End. Google Drive functions ---------
 
-def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=None) -> subprocess.CompletedProcess:
-    print(">>", " ".join(cmd))
+def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=None, verbose=False) -> subprocess.CompletedProcess:
+    if verbose:
+        print(">>", " ".join(cmd))
     p = subprocess.run(
         cmd,
         check=check,
@@ -177,29 +178,22 @@ def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=No
         env=env,
         cwd=cwd,
     )
-    if p.returncode:
-        if p.returncode != 0:
-            print("return code:", p.returncode)
-            print("stdout:\n", p.stdout)
-            print("stderr:\n", p.stderr)
+    if verbose:
+        if p.returncode:
+            if p.returncode != 0:
+                print("return code:", p.returncode)
+                print("stdout:\n", p.stdout)
+                print("stderr:\n", p.stderr)
     return p
 
-def slugify_and_date(name: str) -> str:
-    # Keep readable filenames, but safer for R2 URLs and git files
-    now = datetime.now(timezone.utc)
-    # Example datetime in filename: 20260101123030
-    dt = now.strftime("%Y%m%d%H%M%S")
+def slugify(name: str) -> str:
+    # Keep readable filenames, but safer for git files
     s = unicodedata.normalize("NFKC", name).strip()
     s = name.strip().lower()
     s = re.sub(r"\s+", "-", s)
     s = re.sub(r"[^a-z0-9\-_.]+", "-", s)
     s = re.sub(r"-{2,}", "-", s).strip("-")
-    if s:
-        s = f"{s}-{dt}"
-    else:
-        s = f"car-{dt}"
-    s = s.strip("-")
-    return s
+    return s or 'car'
 
 def ensure_dirs():
     CARS_MD_DIR.mkdir(parents=True, exist_ok=True)
@@ -245,21 +239,29 @@ def make_photo_url(folder_name: str, filename: str) -> str:
     return f"{R2_PUBLIC_BASE_URL}/cars/{quote(folder_name)}/{quote(filename)}"
 
 def create_md(folder_name: str, photo_files: list[str]) -> Path:
-    slug_name = slugify_and_date(folder_name)
-    md_path = CARS_MD_DIR / f"{slug_name}.md"
+    now = datetime.now(timezone.utc)
+    # Example datetime in filename: 20260101123030
+    file_dt = now.strftime("%Y%m%d%H%M%S")
+    iso_dt = now.isoformat(timespec="milliseconds")
+    slug_name = slugify(folder_name)
+    md_path = CARS_MD_DIR / f"{slug_name}-{file_dt}.md"
 
     urls = [make_photo_url(folder_name, f) for f in photo_files]
 
     # YAML front matter (simple + compatible with Jekyll/Eleventy)
     lines = []
     lines.append("---")
+    lines.append('layout: car')
+    lines.append('post_hidden: true')
+    lines.append(f'created_at: {iso_dt}')
     safe_title = folder_name.replace('"', '\\"')
     lines.append(f'title: {safe_title}')
+    lines.append('under_deposit: false')
+    lines.append('on_site: true')
     lines.append("photos:")
     for u in urls:
         lines.append(f'  - {u}')
     lines.append("---")
-    lines.append("")  # content body empty; add later if you want
     md_path.write_text("\n".join(lines), encoding="utf-8")
     return md_path
 
@@ -277,9 +279,6 @@ def main():
             else:
                 shutil.rmtree(p, ignore_errors=True)
     WORK_DIR.mkdir(parents=True, exist_ok=True)
-
-    print(f"CARS_MD_DIR: {CARS_MD_DIR}")
-    print(f"WORK_DIR: {WORK_DIR}")
 
     gdrive_folders = list_gdrive_car_folders(drive, GDRIVE_FOLDER_ID)
     r2_folders = list_r2_car_folders()
