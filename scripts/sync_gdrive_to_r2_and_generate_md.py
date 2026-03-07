@@ -298,7 +298,7 @@ def normal_sync(drive) -> None:
     print(f"GDrive folders: {len(gdrive_folders)}")
     for folder_name in gdrive_folders:
         print(f" - {folder_name}")
-
+    return 0
     print(f"To be uploaded to R2: {len(r2_folders)}")
     for folder_name in r2_folders:
         print(f" - {folder_name}")
