@@ -323,8 +323,9 @@ def normal_sync(drive) -> None:
 
 def create_car_folder(drive) -> None:
     folder_metadata = {
-        "name": "AutoWelt_cars",
-        "mimeType": "application/vnd.google-apps.folder"
+        "name": "test_this",
+        "mimeType": "application/vnd.google-apps.folder",
+        "parents": [GDRIVE_FOLDER_ID],  #TODO
     }
 
     folder = drive.files().create(
