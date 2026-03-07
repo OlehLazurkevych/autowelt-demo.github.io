@@ -299,15 +299,17 @@ def main() -> None:
 
             new_text = rewrite_photo_urls(full_text, photos, new_urls)
 
+            write_text(md, new_text)
+            print(f"Updated {md.name}")
             # backup once
-            backup = md.with_suffix(md.suffix + ".bak")
-            if not backup.exists():
-                md.replace(backup)
-                write_text(md, new_text)
-                print(f"Updated {md.name} (backup: {backup.name})")
-            else:
-                write_text(md, new_text)
-                print(f"Updated {md.name} (backup already existed)")
+            #backup = md.with_suffix(md.suffix + ".bak")
+            #if not backup.exists():
+            #    md.replace(backup)
+            #    write_text(md, new_text)
+            #    print(f"Updated {md.name} (backup: {backup.name})")
+            #else:
+            #    write_text(md, new_text)
+            #    print(f"Updated {md.name} (backup already existed)")
 
         except Exception as e:
             print(f"[ERROR] {md.name}: {e}", file=sys.stderr)

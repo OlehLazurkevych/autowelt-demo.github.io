@@ -4,6 +4,8 @@ import json
 import shutil
 import subprocess
 import unicodedata
+import random
+import string
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 from pathlib import Path
@@ -165,6 +167,23 @@ def copy_gdrive_folder_local(
     for f in _list_children(drive, car_folder_id, only_files=True):
         _download_file(drive, f["id"], target_root / f["name"])
 
+def delete_all_inside_car_folder(drive, gdrive_root_folder_id: str) -> int:
+    deleted = 0
+    cars_id = _find_child_folder_id(drive, gdrive_root_folder_id, "cars")
+    if not cars_id:
+        raise RuntimeError("Could not find a 'cars' folder under the provided root folder ID.")
+
+    car_folders = _list_children(drive, cars_id, only_folders=True, verbose=True)
+
+    for item in car_folders.get("files", []):
+        drive.files().delete(
+            fileId=item["id"],
+            supportsAllDrives=True,
+        ).execute()
+        deleted += 1
+
+    return deleted
+
 # --------- End. Google Drive functions ---------
 
 def run(cmd: list[str], *, check=True, capture=True, text=True, env=None, cwd=None, verbose=False) -> subprocess.CompletedProcess:
@@ -238,7 +257,7 @@ def make_photo_url(folder_name: str, filename: str) -> str:
     # URL-encode per path segment to keep spaces safe
     return f"{R2_PUBLIC_BASE_URL}/cars/{quote(folder_name)}/{quote(filename)}"
 
-def create_md(folder_name: str, photo_files: list[str]) -> Path:
+def create_md(folder_name: str, r2_folder_name: str, photo_files: list[str]) -> Path:
     now = datetime.now(timezone.utc)
     # Example datetime in filename: 20260101123030
     file_dt = now.strftime("%Y%m%d%H%M%S")
@@ -246,7 +265,7 @@ def create_md(folder_name: str, photo_files: list[str]) -> Path:
     slug_name = slugify(folder_name)
     md_path = CARS_MD_DIR / f"{slug_name}-{file_dt}.md"
 
-    urls = [make_photo_url(folder_name, f) for f in photo_files]
+    urls = [make_photo_url(r2_folder_name, f) for f in photo_files]
 
     # YAML front matter (simple + compatible with Jekyll/Eleventy)
     lines = []
@@ -266,7 +285,7 @@ def create_md(folder_name: str, photo_files: list[str]) -> Path:
     return md_path
 
 def main():
-    creds, _ = default(scopes=["https://www.googleapis.com/auth/drive.readonly"])
+    creds, _ = default(scopes=["https://www.googleapis.com/auth/drive"])
     drive = build("drive", "v3", credentials=creds, cache_discovery=False)
 
     ensure_dirs()
@@ -281,31 +300,41 @@ def main():
     WORK_DIR.mkdir(parents=True, exist_ok=True)
 
     gdrive_folders = list_gdrive_car_folders(drive, GDRIVE_FOLDER_ID)
-    r2_folders = list_r2_car_folders()
+    r2_folders = [
+        f"{name} {''.join(random.choices(string.ascii_lowercase, k=4))}"
+        for name in gdrive_folders
+    ]
+    #r2_folders = list_r2_car_folders()
 
-    gdrive_set = set(gdrive_folders)
-    r2_set = set(r2_folders)
+    #gdrive_set = set(gdrive_folders)
+    #r2_set = set(r2_folders)
 
-    missing_on_r2 = sorted(list(gdrive_set - r2_set))
+    #missing_on_r2 = sorted(list(gdrive_set - r2_set))
 
     print(f"GDrive folders: {len(gdrive_folders)}")
-    print(f"R2 folders: {len(r2_folders)}")
-    print(f"Missing on R2: {len(missing_on_r2)}")
-    for folder_name in missing_on_r2:
-        print(folder_name)
+    for folder_name in gdrive_folders:
+        print(f" - {folder_name}")
+
+    print(f"To be uploaded to R2: {len(r2_folders)}")
+    for folder_name in r2_folders:
+        print(f" - {folder_name}")
 
     # For each missing folder:
     # 1) download locally
     # 2) upload to R2
     # 3) generate md with URLs
-    for folder_name in missing_on_r2:
+    # 4) delete GDrive content
+    for folder_name, r2_folder_name in zip(gdrive_folders, r2_folders):
         local_dst = WORK_DIR / "cars" / folder_name
         copy_gdrive_folder_local(drive, GDRIVE_FOLDER_ID, folder_name, local_dst)
-        sync_local_to_r2(local_dst, folder_name)
+        sync_local_to_r2(local_dst, r2_folder_name)
 
         photo_files = list_gdrive_photos_for_folder(drive, GDRIVE_FOLDER_ID, folder_name)
-        md = create_md(folder_name, photo_files)
+        md = create_md(folder_name, r2_folder_name, photo_files)
         print("Created:", md.relative_to(REPO_ROOT))
+
+    deleted_count = delete_all_inside_car_folder(drive, GDRIVE_FOLDER_ID)
+    print(f"Delete {deleted_count} folders in cars on GDrive")
 
 if __name__ == "__main__":
     main()
