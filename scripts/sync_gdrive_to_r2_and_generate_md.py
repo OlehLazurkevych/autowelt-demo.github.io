@@ -175,7 +175,7 @@ def delete_all_inside_car_folder(drive, gdrive_root_folder_id: str) -> int:
 
     car_folders = _list_children(drive, cars_id, only_folders=True, verbose=True)
 
-    for item in car_folders.get("files", []):
+    for item in car_folders:
         drive.files().delete(
             fileId=item["id"],
             supportsAllDrives=True,
