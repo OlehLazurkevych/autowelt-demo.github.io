@@ -375,7 +375,7 @@ def main():
     args = ap.parse_args()
     correct_args = ['normal_sync', 'create_car_folder', 'delete_car_folder']
 
-    if not args.run_mode.exists() or not args.run_mode in correct_args:
+    if not args.run_mode in correct_args:
         print(f"ERROR: Provide correct --run-mode", file=sys.stderr)
         sys.exit(2)
 
