@@ -350,7 +350,13 @@ def create_car_folder(drive) -> None:
 
 
 def delete_car_folder(drive) -> None:
-    print()
+    meta = drive.files().get(
+        fileId="1i5zq1b_o4EHO6m8hwKRKIKtbaX-hjCyl",
+        fields="id,name,driveId,ownedByMe,capabilities(canDelete,canTrash,canMoveItemWithinDrive)",
+        supportsAllDrives=True,
+    ).execute()
+
+    print(meta)
 
 
 def main():
